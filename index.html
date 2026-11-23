@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para mi Pastelito ♡</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Great+Vibes&display=swap');
+
+:root{
+  --rosa:#e9a0ba;
+  --rosa-claro:#fbe8ef;
+  --vino:#a64e75;
+  --vino-oscuro:#793653;
+  --crema:#fffaf7;
+  --papel:#fffdfb;
+  --sombra:0 12px 35px rgba(125,55,83,.12);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; min-height:100vh; color:var(--vino-oscuro);
+  font-family:'DM Sans',sans-serif;
+  background:radial-gradient(circle at 15% 5%,#fff 0,transparent 28%),
+             linear-gradient(145deg,#fff8f7,#fbe8ef 58%,#fff5f6);
+  overflow-x:hidden;
+}
+button{font:inherit; cursor:pointer}
+button:focus-visible{outline:3px solid #c86f96;outline-offset:3px}
+.hearts{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.float-heart{position:absolute;bottom:-35px;color:#d982a4;opacity:.35;animation:rise linear forwards}
+@keyframes rise{to{transform:translateY(-110vh) rotate(25deg);opacity:0}}
+header,.world,.music-area,footer{position:relative;z-index:1}
+header{text-align:center;padding:25px 15px 8px}
+header h1{font:normal 49px 'Great Vibes',cursive;color:#c56890;margin:0}
+header p{font-size:10px;letter-spacing:2px;margin:0;color:#a76a82}
+.world{width:min(100% - 24px,760px);margin:14px auto 28px}
+.welcome{
+  text-align:center;background:rgba(255,253,251,.88);border:1px solid white;
+  border-radius:24px;padding:24px 18px;box-shadow:var(--sombra)
+}
+.welcome .flower{font-size:35px}
+.welcome h2{font:normal 39px 'Great Vibes',cursive;color:#c56890;margin:5px 0}
+.welcome p{font-size:13px;line-height:1.7;max-width:440px;margin:8px auto 17px}
+.primary,.soft,.nav-btn,.gift-button{
+  border:0;border-radius:30px;padding:12px 18px;font-weight:700;
+  transition:transform .2s,filter .2s
+}
+.primary{background:linear-gradient(135deg,#e99ab7,#c96e95);color:white;box-shadow:0 6px 15px #c96e9530}
+.soft{background:white;color:var(--vino);border:1px solid #f1c8d8}
+.primary:hover,.soft:hover,.nav-btn:hover,.gift-button:hover{transform:translateY(-2px);filter:brightness(1.02)}
+.nav{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:13px 0;
+  padding:7px;background:#fff9f8d9;border:1px solid white;border-radius:18px;
+  position:sticky;top:6px;z-index:5;backdrop-filter:blur(10px)
+}
+.nav-btn{padding:10px 3px;background:transparent;color:#a76a82;font-size:10px;display:flex;flex-direction:column;align-items:center;gap:4px}
+.nav-btn span{font-size:17px}
+.nav-btn.active{background:#f8e1ea;color:#914465}
+.panel{display:none;background:rgba(255,253,251,.92);border:1px solid white;border-radius:22px;padding:19px 15px;box-shadow:var(--sombra);margin-bottom:14px;animation:appear .3s ease}
+.panel.active{display:block}
+@keyframes appear{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+.section-title{text-align:center;font:normal 34px 'Great Vibes',cursive;color:#c56890;margin:2px 0 5px}
+.section-sub{text-align:center;font-size:12px;line-height:1.6;color:#a76a82;margin:0 auto 16px;max-width:440px}
+.photo-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.photo-card{background:white;padding:8px;border-radius:15px;box-shadow:0 4px 14px #9b526b14}
+.photo-card img{width:100%;height:190px;object-fit:cover;border-radius:10px;background:#f8e8ee;display:block}
+.photo-card p{font-size:11px;line-height:1.5;text-align:center;margin:8px 2px 3px;color:#98627a}
+.photo-card.special{border:1px solid #efc4d5}
+.photo-card.special p{color:#914465;font-weight:600}
+.gifts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.gift{border:1px solid #f3d3df;border-radius:16px;background:#fff9fb;padding:12px;text-align:center}
+.gift-icon{font-size:36px;display:block;margin:5px}
+.gift h3{font-size:12px;margin:4px 0;color:#914465}
+.gift-button{background:#f5dce6;color:#914465;padding:9px 13px;font-size:11px}
+.gift-content{display:none;margin-top:10px}
+.gift-content.open{display:block;animation:appear .25s}
+.gift-content img{width:100%;max-height:250px;object-fit:contain;border-radius:9px;background:white}
+.gift-content p{font-size:11px;line-height:1.5}
+.game-card{background:#fff8fa;border:1px solid #f1d1dd;border-radius:17px;padding:14px;text-align:center}
+.memory-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:360px;margin:14px auto}
+.memory-card{aspect-ratio:1;border:1px solid #efc4d5;border-radius:12px;background:#f8e3eb;color:#a64e75;font-size:25px;font-weight:700}
+.memory-card.revealed,.memory-card.matched{background:white}
+.memory-card.matched{border-color:#c6dfc9}
+.small-note{font-size:11px;color:#a76a82;line-height:1.5}
+.puzzle-wrap{max-width:340px;margin:14px auto}
+.puzzle{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;aspect-ratio:1;background:white;padding:4px;border-radius:12px;overflow:hidden}
+.piece{border:0;border-radius:3px;background-image:url('foto3.jpg');background-size:300% 300%;background-repeat:no-repeat;min-width:0;min-height:0}
+.piece.selected{outline:4px solid #d66f9a;outline-offset:-4px;filter:brightness(1.12)}
+.puzzle-actions{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:10px}
+.letter-box{max-width:440px;margin:12px auto 0;text-align:center}
+.envelope{background:#f7dce7;border:1px solid #eebfd1;border-radius:16px;padding:20px 14px}
+.envelope .seal{font-size:36px}
+.envelope h3{font:normal 29px 'Great Vibes',cursive;margin:5px;color:#a64e75}
+.letter{display:none;text-align:left;background:#fffdfb;border:1px solid #f2d7e1;border-radius:15px;padding:18px;margin-top:12px;line-height:1.8;font-size:13px;white-space:pre-line}
+.letter.open{display:block;animation:appear .35s}
+.music-area{text-align:center;padding:5px 12px 18px}
+.music-area p{font-size:10px;color:#a76a82}
+footer{text-align:center;padding:4px 12px 25px;font-size:10px;color:#a76a82}
+@media(max-width:390px){
+ header h1{font-size:43px}
+ .world{width:calc(100% - 16px)}
+ .panel{padding:16px 11px}
+ .photo-card img{height:155px}
+ .nav-btn{font-size:9px}
+}
+@media(min-width:600px){
+ .photo-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .photo-card img{height:210px}
+ .gifts{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+</style>
+</head>
+<body>
+<div class="hearts" id="hearts"></div>
+
+<header>
+  <h1>Para mi Pastelito ♡</h1>
+  <p>UN PEQUEÑO MUNDO HECHO PARA TI</p>
+</header>
+
+<main class="world">
+  <section class="welcome" id="welcome">
+    <div class="flower">🌷</div>
+    <h2>Bienvenida a tu rinconcito</h2>
+    <p>Este pequeño mundo es para que puedas pasear, jugar, abrir regalitos y volver a nuestros recuerdos. Está hecho pensando en ti, porque mereces tener un lugar bonito al que regresar.</p>
+    <button class="primary" onclick="goTo('recuerdos')">Entrar a nuestro mundito ♡</button>
+  </section>
+
+  <nav class="nav" aria-label="Secciones del sitio">
+    <button class="nav-btn active" data-panel="recuerdos" onclick="goTo('recuerdos')"><span>📷</span>Recuerdos</button>
+    <button class="nav-btn" data-panel="regalos" onclick="goTo('regalos')"><span>🎁</span>Regalitos</button>
+    <button class="nav-btn" data-panel="juego" onclick="goTo('juego')"><span>🧩</span>Jugar</button>
+    <button class="nav-btn" data-panel="carta" onclick="goTo('carta')"><span>💌</span>Carta</button>
+    <button class="nav-btn" data-panel="puzzle" onclick="goTo('puzzle')"><span>🌸</span>Reto</button>
+  </nav>
+
+  <section class="panel active" id="recuerdos">
+    <h2 class="section-title">Mis partes favoritas de nuestra historia</h2>
+    <p class="section-sub">Cada fotografía guarda un pedacito de nuestra historia. Y en algunas quiero recordarte algo que quizá no te digo lo suficiente.</p>
+    <div class="photo-grid" id="photoGrid"></div>
+  </section>
+
+  <section class="panel" id="regalos">
+    <h2 class="section-title">Unos regalitos para ti</h2>
+    <p class="section-sub">Toca cada regalo para abrirlo. No necesitas una ocasión especial para merecer detalles bonitos. ♡</p>
+    <div class="gifts" id="giftGrid"></div>
+  </section>
+
+  <section class="panel" id="juego">
+    <h2 class="section-title">Un ratito para jugar</h2>
+    <p class="section-sub">Encuentra las parejas. Cada par que descubras es una pequeña dosis de cariño.</p>
+    <div class="game-card">
+      <div><strong id="gameStatus">Encuentra las 4 parejas ♡</strong></div>
+      <div class="memory-grid" id="memoryGrid"></div>
+      <p class="small-note" id="gameMessage">Toca dos tarjetas para descubrir si son iguales.</p>
+      <button class="soft" onclick="startGame()">Volver a mezclar</button>
+    </div>
+  </section>
+
+  <section class="panel" id="carta">
+    <h2 class="section-title">Una carta para ti</h2>
+    <p class="section-sub">Hay una fecha que guardo con muchísimo cariño. Toca el sobre para abrir tu carta.</p>
+    <div class="letter-box">
+      <div class="envelope">
+        <div class="seal">💌</div>
+        <h3>Para mi Pastelito</h3>
+        <p class="small-note">Desde el 11 / 06 / 24, y con todo mi cariño.</p>
+        <button class="primary" onclick="openLetter()">Abrir nuestra carta ♡</button>
+      </div>
+      <div class="letter" id="letterText">Mi Pastelito:
+
+A veces quisiera encontrar las palabras perfectas para explicarte lo mucho que significas para mí, pero creo que ninguna sería suficiente.
+
+Desde aquel 11 de junio de 2024 comenzamos a escribir una historia que se ha llenado de momentos, recuerdos, risas y detalles que guardo con muchísimo cariño. Me encanta tenerte en mi vida y poder compartir contigo tantos pedacitos de mí.
+
+Quiero que nunca olvides lo hermosa que eres. No solamente por lo que se ve en una fotografía, sino por tu forma de ser, por tu esencia, por esos pequeños detalles que te hacen ser tú. Tienes una belleza que merece ser admirada y, sobre todo, tratada con muchísimo cariño. Ojalá pudieras verte con un poquito de la ternura con la que yo te veo.
+
+Gracias por ser parte de mi historia, por cada recuerdo y por todos los momentos que todavía nos esperan. Si algún día necesitas un recordatorio de lo especial que eres, vuelve a este pequeño lugar y recuerda que aquí hay un montón de cariño guardado para ti.
+
+Feliz nuestro nosotros, mi niña. Te quiero muchísimo. ♡
+
+Con todo mi amor,
+tu persona.</div>
+    </div>
+  </section>
+
+  <section class="panel" id="puzzle">
+    <h2 class="section-title">Un recuerdo hecho rompecabezas</h2>
+    <p class="section-sub">Arma nuestra fotografía. Toca una pieza y después otra para intercambiarlas. ¡No hay prisa! ♡</p>
+    <div class="puzzle-wrap">
+      <div class="puzzle" id="puzzleBoard" aria-label="Rompecabezas de nueve piezas"></div>
+      <div class="puzzle-actions">
+        <button class="soft" onclick="shufflePuzzle()">Mezclar piezas</button>
+        <button class="soft" onclick="resetPuzzle()">Ver imagen completa</button>
+      </div>
+      <p class="small-note" id="puzzleStatus" style="text-align:center">Pista: La imagen usa foto3.jpg, un recuerdo de las dos. ♡</p>
+    </div>
+  </section>
+</main>
+
+<div class="music-area">
+  <button class="soft" id="musicBtn" onclick="toggleMusic()">♫ Reproducir nuestra canción</button>
+  <p>Un poquito de música para acompañar este lugar ♡</p>
+  <audio id="music" src="iris.mp3" loop preload="none"></audio>
+</div>
+<footer>Hecho con cariño, para mi Pastelito. ♡</footer>
+
+<script>
+const specialCompliments = {
+  1: "Qué bonita eres. Ojalá pudieras mirarte con la misma ternura con la que yo te miro. ♡",
+  5: "Tienes una luz muy tuya; hay algo en ti que hace especial hasta el momento más sencillo.",
+  10: "No necesitas cambiar nada para merecer que te recuerden lo hermosa y valiosa que eres.",
+  12: "Tu sonrisa y tu manera de ser hacen que esta fotografía sea todavía más especial.",
+  13: "Eres preciosa siendo tú: con tu esencia, tus ocurrencias y todos esos detalles que te hacen única."
+};
+const coupleCaptions = {
+  2: "Mi lugar favorito también está en esos momentos en los que estamos juntitas. ♡",
+  3: "Una foto, dos personas y un recuerdo que siempre quiero conservar.",
+  4: "Qué bonito coincidir contigo y seguir creando historias.",
+  6: "Contigo hasta los días sencillos se convierten en recuerdos especiales.",
+  7: "Esta es otra de mis pruebas favoritas de lo bonito que es compartir contigo.",
+  8: "Me encanta que esta historia tenga tantas pequeñas aventuras de las dos.",
+  9: "Ojalá pudiéramos guardar este instante en un frasquito para volver a él.",
+  11: "De todas las casualidades bonitas, tú eres mi favorita.",
+  14: "Otro capítulo de nosotras que merece quedarse para siempre.",
+  15: "Y pensar que todavía nos faltan muchísimos recuerdos por crear. ♡"
+};
+const photoGrid = document.getElementById("photoGrid");
+for(let i=1;i<=15;i++){
+  const card=document.createElement("article");
+  card.className="photo-card"+(specialCompliments[i]?" special":"");
+  const caption=specialCompliments[i]||coupleCaptions[i]||"Un recuerdo nuestro que guardo con muchísimo cariño. ♡";
+  card.innerHTML=`<img src="foto${i}.jpg" alt="Fotografía ${i}" loading="lazy"><p>${caption}</p>`;
+  photoGrid.appendChild(card);
+}
+
+const giftGrid=document.getElementById("giftGrid");
+const noteMessages = [
+  "Si hoy nadie te lo ha dicho, aquí va mi recordatorio: eres increíble, preciosa y mereces cosas bonitas. ♡",
+  "Vale por un abrazo larguito, de esos que hacen que el mundo se sienta un poquito más tranquilo.",
+  "Misión del día: sonreír aunque sea un poquito. Tu sonrisa es uno de mis recuerdos favoritos.",
+  "Nunca dudes de lo mucho que vales. Tu forma de ser hace más bonito todo lo que te rodea.",
+  "Cupón canjeable por una cita, una plática sin mirar el reloj y muchas risas juntas.",
+  "Si pudiera elegir otra vez, volvería a escoger conocerte y crear recuerdos contigo.",
+  "Recuerda descansar, consentirte y hablarte bonito. También mereces todo ese cariño que das.",
+  "Un deseo para nosotras: que nunca nos falten motivos para reír, aprender y seguir eligiéndonos. ♡"
+];
+for(let i=1;i<=8;i++){
+  const gift=document.createElement("article");
+  gift.className="gift";
+  gift.innerHTML=`<span class="gift-icon">🎁</span><h3>Regalito sorpresa ${i}</h3>
+    <button class="gift-button" onclick="toggleGift(${i})">Abrir regalo</button>
+    <div class="gift-content" id="gift${i}"><img src="nota${i}.jpg" alt="Notita ${i}" loading="lazy"><p>${noteMessages[i-1]}</p></div>`;
+  giftGrid.appendChild(gift);
+}
+function toggleGift(n){
+  const content=document.getElementById("gift"+n);
+  const opening=!content.classList.contains("open");
+  content.classList.toggle("open");
+  const button=content.parentElement.querySelector("button");
+  button.textContent=opening?"Cerrar regalito":"Abrir regalo";
+}
+
+function goTo(id){
+  document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("active",p.id===id));
+  document.querySelectorAll(".nav-btn").forEach(b=>b.classList.toggle("active",b.dataset.panel===id));
+  document.getElementById(id).scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+function openLetter(){
+  const letter=document.getElementById("letterText");
+  letter.classList.toggle("open");
+  document.querySelector("#carta .primary").textContent=letter.classList.contains("open")?"Cerrar cartita":"Abrir nuestra carta ♡";
+}
+
+const symbols=["🌷","💗","🦋","⭐"];
+let first=null,lock=false,matches=0;
+function startGame(){
+  const cards=[...symbols,...symbols].sort(()=>Math.random()-.5);
+  const grid=document.getElementById("memoryGrid");
+  grid.innerHTML="";first=null;lock=false;matches=0;
+  document.getElementById("gameStatus").textContent="Encuentra las 4 parejas ♡";
+  document.getElementById("gameMessage").textContent="Toca dos tarjetas para descubrir si son iguales.";
+  cards.forEach((symbol,index)=>{
+    const btn=document.createElement("button");
+    btn.className="memory-card";btn.type="button";btn.textContent="♡";
+    btn.setAttribute("aria-label","Tarjeta oculta");
+    btn.addEventListener("click",()=>flipCard(btn,symbol));
+    grid.appendChild(btn);
+  });
+}
+function flipCard(btn,symbol){
+  if(lock||btn.classList.contains("revealed")||btn.classList.contains("matched"))return;
+  btn.textContent=symbol;btn.classList.add("revealed");
+  if(!first){first={btn,symbol};return;}
+  if(first.symbol===symbol){
+    first.btn.classList.add("matched");btn.classList.add("matched");
+    first=null;matches++;
+    if(matches===4){
+      document.getElementById("gameStatus").textContent="¡Lo lograste! 💗";
+      document.getElementById("gameMessage").textContent="¡Encontraste todas las parejas! Te ganaste un montón de cariño.";
+    }else document.getElementById("gameMessage").textContent="¡Encontraste una pareja! Sigue así.";
+  }else{
+    lock=true;const previous=first;first=null;
+    document.getElementById("gameMessage").textContent="Casi... inténtalo otra vez.";
+    setTimeout(()=>{
+      previous.btn.textContent="♡";btn.textContent="♡";
+      previous.btn.classList.remove("revealed");btn.classList.remove("revealed");lock=false;
+    },750);
+  }
+}
+startGame();
+
+const puzzleBoard=document.getElementById("puzzleBoard");
+let puzzleOrder=[0,1,2,3,4,5,6,7,8],selectedPiece=null;
+function drawPuzzle(){
+  puzzleBoard.innerHTML="";
+  puzzleOrder.forEach((piece,index)=>{
+    const btn=document.createElement("button");
+    btn.className="piece";btn.type="button";
+    btn.style.backgroundPosition=`${(piece%3)*50}% ${Math.floor(piece/3)*50}%`;
+    if(selectedPiece===index)btn.classList.add("selected");
+    btn.setAttribute("aria-label",`Pieza ${index+1}`);
+    btn.addEventListener("click",()=>selectPiece(index));
+    puzzleBoard.appendChild(btn);
+  });
+}
+function selectPiece(index){
+  if(selectedPiece===null){selectedPiece=index;drawPuzzle();return;}
+  if(selectedPiece===index){selectedPiece=null;drawPuzzle();return;}
+  [puzzleOrder[selectedPiece],puzzleOrder[index]]=[puzzleOrder[index],puzzleOrder[selectedPiece]];
+  selectedPiece=null;drawPuzzle();
+  if(puzzleOrder.every((value,index)=>value===index)){
+    document.getElementById("puzzleStatus").textContent="¡Lo armaste! Qué bonito volver a este recuerdo. ♡";
+  }else{
+    document.getElementById("puzzleStatus").textContent="¡Vas muy bien! Sigue intercambiando las piezas.";
+  }
+}
+function shufflePuzzle(){
+  for(let i=puzzleOrder.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [puzzleOrder[i],puzzleOrder[j]]=[puzzleOrder[j],puzzleOrder[i]];
+  }
+  if(puzzleOrder.every((v,i)=>v===i)) [puzzleOrder[0],puzzleOrder[1]]=[puzzleOrder[1],puzzleOrder[0]];
+  selectedPiece=null;drawPuzzle();
+  document.getElementById("puzzleStatus").textContent="Toca una pieza y luego otra para intercambiarlas.";
+}
+function resetPuzzle(){
+  puzzleOrder=[0,1,2,3,4,5,6,7,8];selectedPiece=null;drawPuzzle();
+  document.getElementById("puzzleStatus").textContent="Imagen completa. Pulsa «Mezclar piezas» para comenzar.";
+}
+drawPuzzle();shufflePuzzle();
+
+const music=document.getElementById("music"),musicBtn=document.getElementById("musicBtn");
+async function toggleMusic(){
+  if(music.paused){
+    try{await music.play();musicBtn.textContent="♫ Pausar nuestra canción";musicBtn.classList.add("primary");}
+    catch(error){alert("No se pudo reproducir el audio. Revisa que iris.mp3 esté junto a este archivo.");}
+  }else{
+    music.pause();musicBtn.textContent="♫ Reproducir nuestra canción";musicBtn.classList.remove("primary");
+  }
+}
+
+const hearts=document.getElementById("hearts");
+function createHeart(){
+  const heart=document.createElement("span");
+  heart.className="float-heart";heart.textContent=["♡","♥","💕"][Math.floor(Math.random()*3)];
+  heart.style.left=Math.random()*100+"%";
+  heart.style.fontSize=(13+Math.random()*13)+"px";
+  heart.style.animationDuration=(9+Math.random()*7)+"s";
+  hearts.appendChild(heart);setTimeout(()=>heart.remove(),17000);
+}
+setInterval(createHeart,1300);
+</script>
+</body>
+</html>
